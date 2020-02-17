@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import MaterialTable from 'material-table';
+import MaterialTable from 'material-table'
 
-export default function MaterialTableDemo() {
+export default function Table() {
   const [state, setState] = React.useState({
     columns: [
       { title: 'Project', field: 'project' },
@@ -23,7 +23,7 @@ export default function MaterialTableDemo() {
         result: 34,
       },
     ],
-  });
+  })
 
   return (
     <MaterialTable
@@ -36,11 +36,11 @@ export default function MaterialTableDemo() {
             setTimeout(() => {
               resolve();
               setState(prevState => {
-                const data = [...prevState.data];
-                data.push(newData);
-                return { ...prevState, data };
-              });
-            }, 600);
+                const data = [...prevState.data]
+                data.push(newData)
+                return { ...prevState, data }
+              })
+            }, 600)
           }),
         onRowUpdate: (newData, oldData) =>
           new Promise(resolve => {
@@ -48,32 +48,32 @@ export default function MaterialTableDemo() {
               resolve();
               if (oldData) {
                 setState(prevState => {
-                  const data = [...prevState.data];
-                  data[data.indexOf(oldData)] = newData;
-                  return { ...prevState, data };
-                });
+                  const data = [...prevState.data]
+                  data[data.indexOf(oldData)] = newData
+                  return { ...prevState, data }
+                })
               }
-            }, 600);
+            }, 600)
           }),
         onRowDelete: oldData =>
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
               setState(prevState => {
-                const data = [...prevState.data];
-                data.splice(data.indexOf(oldData), 1);
-                return { ...prevState, data };
-              });
-            }, 600);
+                const data = [...prevState.data]
+                data.splice(data.indexOf(oldData), 1)
+                return { ...prevState, data }
+              })
+            }, 600)
           }),
       }}
     />
-  );
+  )
 }
 
 
   ReactDOM.render(
-    <MaterialTableDemo />,
+    <Table />,
     document.getElementById('welcome'),
   )
 
