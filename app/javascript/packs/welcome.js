@@ -11,7 +11,7 @@ export default function Table() {
       {
         title: 'Result',
         field: 'result',
-        lookup: { 34: 'performed', 63: 'not performed', 65: 'in prosess' },
+        lookup: { 34: 'performed', 63: 'not performed', 65: 'in process' },
       },
     ],
     data: [
