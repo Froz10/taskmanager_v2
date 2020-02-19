@@ -2,12 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import MaterialTable from 'material-table'
 
-export default function Table() {
+function Table() {
   const [state, setState] = React.useState({
     columns: [
       { title: 'Project', field: 'project' },
       { title: 'Task', field: 'task' },
-      { title: 'DeadLine', field: 'deadline', type: 'datatime' },
+      { title: 'DeadLine', field: 'deadline', type: 'date' },
       {
         title: 'Result',
         field: 'result',
