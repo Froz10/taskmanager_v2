@@ -2,57 +2,88 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 
-class Square extends React.Component {
-  render() {
-    var squareStyle = {
-    height: 150,
-    backgroundColor: this.props.color
+class LightningCounter extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      strikes: 0
     };
 
+    this.timerTick = this.timerTick.bind(this);
+  }
+
+  timerTick() {
+    this.setState({
+      strikes: this.state.strikes + 100
+    });
+  }
+
+  componentDidMount() {
+    setInterval(this.timerTick, 1000);
+  }
+
+  render() {
+    var counterStyle = {
+      color: "#66FFFF",
+      fontSize: 50
+    };
+
+    var count = this.state.strikes.toLocaleString();
+
     return (
-      <div style={squareStyle}>
-    </div>
+      <h1 style={counterStyle}>{count}</h1>
     );
   }
 }
 
-class Label extends React.Component {
+class LightningCounterDisplay extends React.Component {
   render() {
-    var labelStyle = {
+    var commonStyle = {
+      margin: 0,
+      padding: 0
+    };
+
+    var divStyle = {
+      width: 250,
+      textAlign: "center",
+      backgroundColor: "#020202",
+      padding: 40,
       fontFamily: "sans-serif",
-      fontWeight: "bold",
-      padding: 13,
-      margin: 0
+      color: "#999999",
+      borderRadius: 10
     };
 
-    return (
-      <p style={labelStyle}>{this.props.color}</p>
-    );
-  }
-}
+    var textStyles = {
+      emphasis: {
+        fontSize: 38,
+        ...commonStyle
+      },
 
-class Card extends React.Component {
-  render() {
-    var cardStyle = {
-      height: 200,
-      width: 150,
-      padding: 0,
-      backgroundColor: "#FFF",
-      boxShadow: "0px 0px 5px #666"
+      smallEmphasis: {
+        ...commonStyle
+      },
+
+      small: {
+        fontSize: 17,
+        opacity: 0.5,
+        ...commonStyle
+      }
     };
 
+
     return (
-      <div style={cardStyle}>
-      <Square color={this.props.color} />
-      <Label color={this.props.color} />
-    </div>
+      <div style={divStyle}>
+        <LightningCounter />
+        <h2 style={textStyles.smallEmphasis}>ВСПЫШКИ МОЛНИИ</h2>
+        <h2 style={textStyles.emphasis}>НА ПЛАНЕТЕ</h2>
+        <p style={textStyles.small}>(с момента запуска кода)</p>
+      </div>
     );
   }
 }
 
 ReactDOM.render(
-  <div>
-    <Card color="#FFA737"/>
-  </div>,
+  <LightningCounterDisplay />,
   document.querySelector("#container")
 );
